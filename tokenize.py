@@ -9,7 +9,14 @@ with open('wordcutpy/bigthai.txt') as dict_file:
 
 def word_tokenize(lines):
     lines = lines.replace('\n',' ')
-    return [word.strip() for word in wordcut.tokenize(lines)]
+    token = []
+    word_tokenize = wordcut.tokenize(lines)
+    for word in word_tokenize:
+        if word == ' ':
+            token.append(word)
+        else:
+            token.append(word.strip())
+    return token
 
 def main():
     wordcut = 0
