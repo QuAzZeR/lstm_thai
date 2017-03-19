@@ -2,3 +2,5 @@ __pycache__/*
 lstm/*
 Result/*
 wordcutpy/*
+prefixtree.py
+*.pyc

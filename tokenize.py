@@ -1,5 +1,4 @@
 from wordcutpy.wordcut import Wordcut
-
 wordcut = 0
 with open('wordcutpy/bigthai.txt') as dict_file:
     word_list = list(set([w.rstrip() for w in dict_file.readlines()]))

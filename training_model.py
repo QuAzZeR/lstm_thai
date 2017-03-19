@@ -5,15 +5,14 @@ from keras.layers import Dropout
 from keras.layers import LSTM
 from keras.callbacks import ModelCheckpoint
 from keras.utils import np_utils
-from get_thai_file import get_thai_list
-FILE_NAME = "../Data/Dek-d/RealFace/"
+from preprocess	import get_seq_of_word
 
 def main():
 #    raw_text = "" 
 #    for i in range(1,16):
 #        raw_text += open(FILE_NAME+str(i)).read()
 
-    raw_text = get_thai_list()
+    raw_text = get_seq_of_word()
 
     chars = sorted(list(set(raw_text)))
     char_to_int = dict((c,i) for i,c in enumerate(chars))
