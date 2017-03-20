@@ -1,4 +1,4 @@
-from tokenize import word_tokenize
+from word_tokenize import word_tokenize
 FILE_PATH = '../data/Dek-d/RealFace/%d'
 RANGE = range(1,16)
 def get_seq_of_word():
