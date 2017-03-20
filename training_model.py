@@ -46,7 +46,7 @@ def main():
     model.add(Dense(y.shape[1], activation='softmax'))
     model.compile(loss='categorical_crossentropy', optimizer='adam')
     # define the checkpoint
-    filepath="./20ArticleWindowSize05/weights-improvement-{epoch:02d}-{loss:.4f}.hdf5"
+    filepath="./RealFaceWordWindowSize05/weights-improvement-{epoch:02d}-{loss:.4f}.hdf5"
     checkpoint = ModelCheckpoint(filepath, monitor='loss', verbose=1, save_best_only=True, mode='min')
     callbacks_list = [checkpoint]
     model.fit(X, y, nb_epoch=80, batch_size=128, callbacks=callbacks_list)
