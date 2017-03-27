@@ -4,3 +4,5 @@ Result/*
 wordcutpy/*
 prefixtree.py
 *.pyc
+*#*
+test.py
