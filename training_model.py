@@ -21,7 +21,7 @@ def main():
     print ("Total Thai Vocab: %s"%(n_chars))
     print ("Total Unique Vocab: %s"%(n_vocab))
     # print(chars)
-    seq_length = 5
+    seq_length = 10
     dataX = []
     dataY = []
     for i in range(0,n_chars - seq_length,1):
@@ -46,7 +46,7 @@ def main():
     model.add(Dense(y.shape[1], activation='softmax'))
     model.compile(loss='categorical_crossentropy', optimizer='adam')
     # define the checkpoint
-    filepath="./RealFaceWordWindowSize05/weights-improvement-{epoch:02d}-{loss:.4f}.hdf5"
+    filepath="Result/RealFaceWordWindowSize10/weights-improvement-{epoch:02d}-{loss:.4f}.hdf5"
     checkpoint = ModelCheckpoint(filepath, monitor='loss', verbose=1, save_best_only=True, mode='min')
     callbacks_list = [checkpoint]
     model.fit(X, y, nb_epoch=80, batch_size=128, callbacks=callbacks_list)

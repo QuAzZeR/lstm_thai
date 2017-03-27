@@ -7,13 +7,13 @@ from keras.layers import Dropout
 from keras.layers import LSTM
 from keras.callbacks import ModelCheckpoint
 from keras.utils import np_utils
-from get_thai_file import get_thai_list
+from preprocess import get_seq_of_word
 FILE_NAME = "../Data/Dek-d/RealFace/"
 # load ascii text and covert to lowercase
 #raw_text =""
 #for i in range(1,16):
 #    raw_text += open(FILE_NAME+str(i)).read()
-raw_text = get_thai_list()
+raw_text = get_seq_of_word()
 # create mapping of unique chars to integers, and a reverse mapping
 chars = sorted(list(set(raw_text)))
 char_to_int = dict((c, i) for i, c in enumerate(chars))
@@ -47,7 +47,7 @@ model.add(LSTM(256, input_shape=(X.shape[1], X.shape[2])))
 model.add(Dropout(0.2))
 model.add(Dense(y.shape[1], activation='softmax'))
 # load the network weights
-filename = "./20ArticleWindowSize05/weights-improvement-79-4.1433.hdf5"
+filename = "Result/RealFaceWordWindowSize10/weights-improvement-63-4.0191.hdf5"
 model.load_weights(filename)
 model.compile(loss='categorical_crossentropy', optimizer='adam')
 # pick a random seed
