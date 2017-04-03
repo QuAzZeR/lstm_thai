@@ -6,12 +6,25 @@ def get_seq_of_word():
     sequence_word = []
     for i in RANGE:
         with open(FILE_PATH%(i),'r') as text_file:
-            lines = text_file.read()
-            sequence_word += word_tokenize(lines)
-    return sequence_word
+            lines = text_file.readlines()
+            # print(lines)
+            for line in lines:
+                if line == '\n':
+                    continue
+                # print([line])
+                line_remove = ''.join([i for i in line.strip() if i.isalnum() or i ==' ' or i in list_thai_char])
+                # print([line_remove])
+                if line_remove != '':
+                    sequence_word+=word_tokenize(line_remove)
+                    sequence_word += '\n'
+                # print (sequence_word)
+                # break
+
+
+    # return sequence_word
 
 
 if __name__ == '__main__':
-
-    for i in (list_thai_char):
-        print ([i])
+    get_seq_of_word()
+    # for i in (list_thai_char):
+    #     print ([i])
