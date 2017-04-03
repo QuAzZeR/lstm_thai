@@ -7,7 +7,7 @@ with open('wordcutpy/bigthai.txt') as dict_file:
 
 
 def word_tokenize(lines):
-    lines = lines.replace('\n',' ')
+    # lines = lines.replace('\n',' ')
     token = []
     word_tokenize = wordcut.tokenize(lines)
     for word in word_tokenize:
