@@ -21,7 +21,7 @@ def get_seq_of_word():
                 # break
 
 
-    # return sequence_word
+	return sequence_word
 
 
 if __name__ == '__main__':
