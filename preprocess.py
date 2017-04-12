@@ -17,11 +17,7 @@ def get_seq_of_word():
                 if line_remove != '':
                     sequence_word+=word_tokenize(line_remove)
                     sequence_word += '\n'
-                # print (sequence_word)
-                # break
-
-
-<<<<<<< HEAD
+                
     return sequence_word
 def get_seq_of_char():
     sequence_char = []
@@ -36,13 +32,8 @@ def get_seq_of_char():
                     sequence_char += line_remove
                     sequence_char += '\n'
     return sequence_char
-=======
-	return sequence_word
 
-
->>>>>>> 92db0a45b333c96192ce2b49768c36cd05be83dd
 if __name__ == '__main__':
     # print(get_seq_of_word())
     print(get_seq_of_char())
-    # for i in (list_thai_char):
-    #     print ([i])
+    
