@@ -1,3 +1,4 @@
+import sys
 import numpy
 from keras.models import Sequential
 from keras.layers import Dense
@@ -7,13 +8,10 @@ from keras.callbacks import ModelCheckpoint
 from keras.utils import np_utils
 from preprocess	import get_seq_of_word
 
-def main():
-#    raw_text = "" 
-#    for i in range(1,16):
-#        raw_text += open(FILE_NAME+str(i)).read()
-
+def train_model(seq_length,path):
+    print (seq_length,path)
+    return
     raw_text = get_seq_of_word()
-
     chars = sorted(list(set(raw_text)))
     char_to_int = dict((c,i) for i,c in enumerate(chars))
     n_chars = len(raw_text)
@@ -21,7 +19,7 @@ def main():
     print ("Total Thai Vocab: %s"%(n_chars))
     print ("Total Unique Vocab: %s"%(n_vocab))
     # print(chars)
-    seq_length = 10
+    # seq_length = 10
     dataX = []
     dataY = []
     for i in range(0,n_chars - seq_length,1):
@@ -46,10 +44,10 @@ def main():
     model.add(Dense(y.shape[1], activation='softmax'))
     model.compile(loss='categorical_crossentropy', optimizer='adam')
     # define the checkpoint
-    filepath="Result/RealFaceWordWindowSize10/weights-improvement-{epoch:02d}-{loss:.4f}.hdf5"
+    filepath=path+"/weights-improvement-{epoch:02d}-{loss:.4f}.hdf5"
     checkpoint = ModelCheckpoint(filepath, monitor='loss', verbose=1, save_best_only=True, mode='min')
     callbacks_list = [checkpoint]
     model.fit(X, y, nb_epoch=80, batch_size=128, callbacks=callbacks_list)
     
 if __name__ == '__main__' :
-    main()
+    train_model(int(sys.argv[1]),sys.argv[2])
