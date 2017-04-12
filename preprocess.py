@@ -21,10 +21,22 @@ def get_seq_of_word():
                 # break
 
 
-    # return sequence_word
-
-
+    return sequence_word
+def get_seq_of_char():
+    sequence_char = []
+    for i in RANGE:
+        with open(FILE_PATH%(i),'r') as text_file:
+            lines = text_file.readlines()
+            for line in lines:
+                if line =='\n':
+                    continue
+                line_remove = ''.join([i for i in line.strip() if i.isalnum() or i ==' ' or i in list_thai_char])
+                if line_remove != '':
+                    sequence_char += line_remove
+                    sequence_char += '\n'
+    return sequence_char
 if __name__ == '__main__':
-    get_seq_of_word()
+    # print(get_seq_of_word())
+    print(get_seq_of_char())
     # for i in (list_thai_char):
     #     print ([i])
