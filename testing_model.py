@@ -15,7 +15,7 @@ FILE_NAME = "../Data/Dek-d/RealFace/"
 #    raw_text += open(FILE_NAME+str(i)).read()
 def testing_model(seq_length,filename):
     print (seq_length,filename)
-    return 1
+    # return/ 1
     raw_text = get_seq_of_word()
     # create mapping of unique chars to integers, and a reverse mapping
     chars = sorted(list(set(raw_text)))
