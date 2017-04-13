@@ -6,12 +6,15 @@ from keras.layers import Dropout
 from keras.layers import LSTM
 from keras.callbacks import ModelCheckpoint
 from keras.utils import np_utils
-from preprocess	import get_seq_of_word
+from preprocess	import get_seq_of_word,get_seq_of_char
 
-def train_model(seq_length,path):
+def train_model(seq_length,path,is_char):
     print (seq_length,path)
     # return
-    raw_text = get_seq_of_word()
+    if is_char:
+        raw_text = get_seq_of_char()
+    else:
+        raw_text = get_seq_of_word
     chars = sorted(list(set(raw_text)))
     char_to_int = dict((c,i) for i,c in enumerate(chars))
     n_chars = len(raw_text)
@@ -52,4 +55,4 @@ def train_model(seq_length,path):
     model.fit(X, y, nb_epoch=80, batch_size=128, callbacks=callbacks_list)
     
 if __name__ == '__main__' :
-    train_model(int(sys.argv[1]),sys.argv[2])
+    train_model(int(sys.argv[1]),sys.argv[2],bool(int(sys.argv[3])))

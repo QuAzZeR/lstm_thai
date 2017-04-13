@@ -7,16 +7,19 @@ from keras.layers import Dropout
 from keras.layers import LSTM
 from keras.callbacks import ModelCheckpoint
 from keras.utils import np_utils
-from preprocess import get_seq_of_word
+from preprocess import get_seq_of_word,get_seq_of_char
 FILE_NAME = "../Data/Dek-d/RealFace/"
 # load ascii text and covert to lowercase
 #raw_text =""
 #for i in range(1,16):
 #    raw_text += open(FILE_NAME+str(i)).read()
-def testing_model(seq_length,filename):
+def testing_model(seq_length,filename,is_char):
     print (seq_length,filename)
     # return/ 1
-    raw_text = get_seq_of_word()
+    if is_char :
+        raw_text = get_seq_of_char()
+    else:
+        raw_text = get_seq_of_word()
     # create mapping of unique chars to integers, and a reverse mapping
     chars = sorted(list(set(raw_text)))
     char_to_int = dict((c, i) for i, c in enumerate(chars))
@@ -73,5 +76,5 @@ def testing_model(seq_length,filename):
         pattern = pattern[1:len(pattern)]
     print ("\nDone.")
 if __name__ =='__main__':
-    testing_model(int(sys.argv[1]),sys.argv[2])
-	
+    
+	testing_model(int(sys.argv[1]),sys.argv[2],bool(int(sys.argv[3])))
