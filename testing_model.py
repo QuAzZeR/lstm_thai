@@ -49,7 +49,9 @@ def testing_model(seq_length,filename,is_char):
     y = np_utils.to_categorical(dataY)
     # define the LSTM model
     model = Sequential()
-    model.add(LSTM(256, input_shape=(X.shape[1], X.shape[2])))
+    model.add(LSTM(256,input_shape=(X.shape[1], X.shape[2]), return_sequences=True))
+    model.add(Dropout(0.2))
+    model.add(LSTM(256))
     model.add(Dropout(0.2))
     model.add(Dense(y.shape[1], activation='softmax'))
     # load the network weights
