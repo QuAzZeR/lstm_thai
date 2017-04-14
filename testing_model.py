@@ -55,7 +55,7 @@ def testing_model(seq_length,filename,is_char):
     # load the network weights
     # filename = "Result/RealFaceWordWindowSize10/weights-improvement-63-4.0191.hdf5"
     # filename = filep
-    model.load_weights(filepath)
+    model.load_weights(filename)
     model.compile(loss='categorical_crossentropy', optimizer='adam')
     # pick a random seed
     start = numpy.random.randint(0, len(dataX)-1)
@@ -76,5 +76,5 @@ def testing_model(seq_length,filename,is_char):
         pattern = pattern[1:len(pattern)]
     print ("\nDone.")
 if __name__ =='__main__':
-    
+
 	testing_model(int(sys.argv[1]),sys.argv[2],bool(int(sys.argv[3])))
