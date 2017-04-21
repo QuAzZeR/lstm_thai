@@ -15,6 +15,7 @@ def prepare_data(is_char,seq_length):
     
     n_chars = len(raw_text)
     n_vocab = len(chars)
+    prepared_data.n_vocab = n_vocab
     print ("Total Thai Vocab: %s"%(n_chars))
     print ("Total Unique Vocab: %s"%(n_vocab))
     # print(chars)

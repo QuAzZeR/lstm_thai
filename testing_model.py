@@ -32,7 +32,7 @@ def testing_model(seq_length,filename,is_char):
     # generate characters
     for i in range(1000):
         x = numpy.reshape(pattern, (1, len(pattern), 1))
-        x = x / float(n_vocab)
+        x = x / float(prepared_data.n_vocab)
         prediction = model.predict(x, verbose=0)
         index = numpy.argmax(prediction)
         result = prepared_data.int_to_char[index]
