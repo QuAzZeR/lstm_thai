@@ -27,7 +27,7 @@ def testing_model(seq_length,filename,is_char):
     start = numpy.random.randint(0, len(prepared_data.dataX)-1)
     pattern = prepared_data.dataX[start]
     print ("Seed:")
-    print ("\""+ ''.join([int_to_char[value] for value in pattern])+ "\"")
+    print ("\""+ ''.join([prepared_data.int_to_char[value] for value in pattern])+ "\"")
     print("----------------------------------\n")
     # generate characters
     for i in range(1000):
