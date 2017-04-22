@@ -35,8 +35,8 @@ def testing_model(seq_length,filename,is_char):
         x = x / float(prepared_data.n_vocab)
         prediction = model.predict(x, verbose=0)
         index = numpy.argmax(prediction)
-        result = prepared_data.int_to_char[index]
-        seq_in = [(prepared_data.int_to_char[value]).split('_')[1] for value in pattern]
+        result = (prepared_data.int_to_char[index]).split('_')[1]
+        seq_in = [prepared_data.int_to_char[value] for value in pattern]
         sys.stdout.write(result)
         pattern.append(index)
         pattern = pattern[1:len(pattern)]
