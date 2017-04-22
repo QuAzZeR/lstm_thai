@@ -143,20 +143,18 @@ def map_char_with_int (data):
             # check_consonant()
         else:
             type_of_char.append(KEY_NONE)
-
-        # print(current_char,seq_of_char[:i])
-        # print(type_of_char)
-
-    # print(type_of_char)
-    temp = [map_thai_char[i] for i in type_of_char]
-    # for i in range(len(data)):
-    #     print(data[i] ,temp[i])
+    
+    temp = []
+    for i in range(len(seq_of_char)):
+        temp.append(map_thai_char[type_of_char[i]] +"_"+ seq_of_char[i] )
+    # print (temp)
+    return temp    
         
     
     
         
 if __name__ == '__main__':
-    map_char_with_int('เอางี้ละกัน ช่างโง่เขลาซะเหลือเกิน')
+    print(map_char_with_int('เอางี้ละกัน ช่างโง่เขลาซะเหลือเกิน'))
             
 
       
