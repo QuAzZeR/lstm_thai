@@ -24,13 +24,13 @@ KEY_TONE_MARK = 6
 
 seq_of_char = ""
 type_of_char = []
-print (len(start_vowel),len(karan),len(vowel),len(tone_mark),len(consonant),len(thai_number),len(list_thai_char))
-print (len(set(start_vowel)),len(set(karan)),len(set(vowel)),len(set(tone_mark)),len(set(consonant)),len(set(thai_number)),len(set(list_thai_char)))
+# print (len(start_vowel),len(karan),len(vowel),len(tone_mark),len(consonant),len(thai_number),len(list_thai_char))
+# print (len(set(start_vowel)),len(set(karan)),len(set(vowel)),len(set(tone_mark)),len(set(consonant)),len(set(thai_number)),len(set(list_thai_char)))
 
-print([' ' + temp for temp in vowel])
-for i in list_thai_char:
-    if i not in start_vowel+karan+vowel+tone_mark+consonant+thai_number:
-        print(i)
+# print([' ' + temp for temp in vowel])
+# for i in list_thai_char:
+#     if i not in start_vowel+karan+vowel+tone_mark+consonant+thai_number:
+#         print(i)
 # print("dasdasdj;aklsdasasdasdsadasdl;askdjasld;aklasjdas;jksdakls;djadkl;asjkl")
 # temp = {}
 # for i in start_vowel+karan+vowel+tone_mark+consonant+thai_number:
@@ -73,11 +73,12 @@ def check_vowel(index):
     index_previous = index - 1
     index_previous_of_previous = index - 2
     index_previous_of_previous_of_previous = index - 3
+    
     current_char = seq_of_char[index]
     previous_char = seq_of_char[index_previous]
     previous_of_previous_char = seq_of_char[index_previous_of_previous]
     previous_of_previous_of_previous_char = seq_of_char[index_previous_of_previous_of_previous]
-
+    
     if current_char in start_vowel:
         pass
     if current_char in 'ำะัีาิืุูึ็':
@@ -95,14 +96,34 @@ def check_vowel(index):
     type_of_char.append(KEY_VOWEL)
 
 def check_consonant(index):
+    global type_of_char
+    index_previous = index - 1
+    index_previous_of_previous = index - 2
+    index_previous_of_previous_of_previous = index - 3
+    current_char = seq_of_char[index]
+    previous_char = seq_of_char[index_previous]
+    previous_of_previous_char = seq_of_char[index_previous_of_previous]
+    previous_of_previous_of_previous_char = seq_of_char[index_previous_of_previous_of_previous]
     
-
-    type_of_char.append(KEY_TON)
-
-
-
+    if previous_char in start_vowel :
+        type_of_char.append(KEY_TON)
+    elif previous_char in vowel or (previous_char in tone_mark and previous_of_previous_char in vowel):
+        if current_char in 'อยว':
+            type_of_char.append(KEY_VOWEL)
+        else:
+            type_of_char.append(KEY_SAKOD)
+            
+    elif previous_char in tone_mark and previous_of_previous_char in consonant:
+        type_of_char.append(KEY_SAKOD)
+    elif previous_char in 'อยว':
+        if previous_of_previous_char in consonant or ((previous_of_previous_char in tone_mark ) and (previous_of_previous_of_previous_char in consonant)):
+            type_of_char[index_previous] = KEY_VOWEL
+            type_of_char.append(KEY_SAKOD)
+    else:
+        type_of_char.append(KEY_NONE)
+    
+    
 def map_char_with_int (data):
-    
     global seq_of_char
     global type_of_char
     seq_of_char = data
@@ -122,13 +143,14 @@ def map_char_with_int (data):
             # check_consonant()
         else:
             type_of_char.append(KEY_NONE)
-        print(current_char,seq_of_char[:i])
-        print(type_of_char)
 
-    print(type_of_char)
+        # print(current_char,seq_of_char[:i])
+        # print(type_of_char)
+
+    # print(type_of_char)
     temp = [map_thai_char[i] for i in type_of_char]
-    for i in range(len(data)):
-        print(data[i] ,temp[i])
+    # for i in range(len(data)):
+    #     print(data[i] ,temp[i])
         
     
     
