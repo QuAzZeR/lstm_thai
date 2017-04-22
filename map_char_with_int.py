@@ -1,10 +1,10 @@
 start_vowel = 'เแใไโ'
 karan = '์'
-vowel= 'ฦิฺืๅา็ฤๆำะัํฯุู'
+vowel= 'ๅุูึำะัํีฤ็าิฺืฦ'
 tone_mark = '่้๊๋'
 consonant = 'กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟมยรลภวศษสหฬอฮ'
 thai_number = '๑๒๓๔๕๖๗๘๙๐'
-list_thai_char='ๅ๑๒ภ๓ถ๔ุูึ฿ค๕ต๖จ๗ข๘ช๙ๆ๐ไำฎพฑะธัํี๊รณนฯยญบฐลฟฤหฆกฏดโเฌ้็่๋าษสศวซงผปแฉอฮิฺื์ทมฒใฬฝฦ'
+list_thai_char='ๅ๑๒ภ๓ถ๔ุูึ฿ค๕ต๖จ๗ข๘ช๙ๆ๐ไำฎพฑะธัํี๊รณนฯยญบฐลฟฤหฆกฏดโเฌ้็่๋าษสศวซงผปแฉอฮิฺื์ทมฒใฬฝฦฅฃ'
 map_thai_char = {
     0: 'none',
     1: 'ton',
@@ -12,13 +12,34 @@ map_thai_char = {
     3: 'kuab',
     4: 'vowel',
     5: 'karan',
-    6: 'vowel',
-    7: 'tone'
+    6: 'tone'
 }
+KEY_NONE = 0
+KEY_TON = 1
+KEY_SAKOD = 2
+KEY_KUAB = 3
+KEY_VOWEL = 4
+KEY_KARAN = 5
+KEY_TONE_MARK = 6
 
 seq_of_char = ""
 type_of_char = []
 print (len(start_vowel),len(karan),len(vowel),len(tone_mark),len(consonant),len(thai_number),len(list_thai_char))
+print (len(set(start_vowel)),len(set(karan)),len(set(vowel)),len(set(tone_mark)),len(set(consonant)),len(set(thai_number)),len(set(list_thai_char)))
+
+print([' ' + temp for temp in vowel])
+for i in list_thai_char:
+    if i not in start_vowel+karan+vowel+tone_mark+consonant+thai_number:
+        print(i)
+# print("dasdasdj;aklsdasasdasdsadasdl;askdjasld;aklasjdas;jksdakls;djadkl;asjkl")
+# temp = {}
+# for i in start_vowel+karan+vowel+tone_mark+consonant+thai_number:
+#     if i in temp:
+#         temp[i] += 1
+#     else:
+#         temp[i] = 1
+# print(temp)
+# print ("_______")
 # print (map_thai_char)
 def check_karan(index):
     global type_of_char
@@ -30,24 +51,55 @@ def check_karan(index):
     previous_of_previous_of_previous_char = seq_of_char[index_previous_of_previous_of_previous]
     
     if previous_char in vowel:
-         type_of_char[index_previous_of_previous] = 5
+         type_of_char[index_previous_of_previous] = KEY_KARAN
     
     elif previous_char == 'ร' and previous_of_previous_char == 'ต':
-        type_of_char[index_previous_of_previous] = 5
+        type_of_char[index_previous_of_previous] = KEY_KARAN
 
     elif previous_of_previous_char == 'ท' and (previous_char =='ร' or previous_char =='น'):
-        type_of_char[index_previous_of_previous] = 5
+        type_of_char[index_previous_of_previous] = KEY_KARAN
     
     elif previous_char =='ย' and previous_of_previous_char in 'ิ' and previous_of_previous_of_previous_char == 'ร':
         
-        type_of_char[index_previous_of_previous] = 5        
-        type_of_char[index_previous_of_previous_of_previous] = 5    
+        type_of_char[index_previous_of_previous] = KEY_KARAN
+        type_of_char[index_previous_of_previous_of_previous] = KEY_KARAN
     
-    type_of_char[index_previous] = 5
+    type_of_char[index_previous] = KEY_KARAN
+
+    type_of_char.append(KEY_KARAN)
+
+def check_vowel(index):
+    global type_of_char
+    index_previous = index - 1
+    index_previous_of_previous = index - 2
+    index_previous_of_previous_of_previous = index - 3
+    current_char = seq_of_char[index]
+    previous_char = seq_of_char[index_previous]
+    previous_of_previous_char = seq_of_char[index_previous_of_previous]
+    previous_of_previous_of_previous_char = seq_of_char[index_previous_of_previous_of_previous]
+
+    if current_char in start_vowel:
+        pass
+    if current_char in 'ำะัีาิืุูึ็':
+        if previous_char in 'รลว' and previous_of_previous_char in consonant:
+            type_of_char[index_previous] = KEY_KUAB
+            type_of_char[index_previous_of_previous] = KEY_TON
+        elif previous_char in consonant:
+            type_of_char[index_previous] = KEY_TON
+        
+        
+    
+    
+    
+    
+    type_of_char.append(KEY_VOWEL)
+
+def check_consonant(index):
+    
+
+    type_of_char.append(KEY_TON)
 
 
-
-    return 5
 
 def map_char_with_int (data):
     
@@ -58,19 +110,31 @@ def map_char_with_int (data):
     for i in  range(len(seq_of_char)):
         current_char = seq_of_char[i]
         if current_char in karan:
-            type_of_char.append(check_karan(i))
+            check_karan(i)
         elif current_char in vowel or current_char in start_vowel:
-            type_of_char.append(6)
+            check_vowel(i)
         elif current_char in tone_mark:
-            type_of_char.append(7)
+            
+            type_of_char.append(KEY_TONE_MARK)
         elif current_char in consonant:
-            type_of_char.append(1)
+            # print(current_char)
+            check_consonant(i)
+            # check_consonant()
         else:
-            type_of_char.append(0)  
+            type_of_char.append(KEY_NONE)
+        print(current_char,seq_of_char[:i])
+        print(type_of_char)
+
+    print(type_of_char)
+    temp = [map_thai_char[i] for i in type_of_char]
+    for i in range(len(data)):
+        print(data[i] ,temp[i])
+        
     
     
         
-            
+if __name__ == '__main__':
+    map_char_with_int('เอางี้ละกัน ช่างโง่เขลาซะเหลือเกิน')
             
 
-            
+      
