@@ -24,7 +24,7 @@ def train_model(seq_length,path,is_char):
     filepath=path+"/weights-improvement-{epoch:02d}-{loss:.4f}.hdf5"
     checkpoint = ModelCheckpoint(filepath, monitor='loss', verbose=1, save_best_only=True, mode='min')
     callbacks_list = [checkpoint]
-    model.fit(prepared_data.X, prepared_data.Y, nb_epoch=80, batch_size=128, callbacks=callbacks_list)
+    model.fit(prepared_data.X, prepared_data.Y, nb_epoch=40, batch_size=128, callbacks=callbacks_list)
     
 if __name__ == '__main__' :
     train_model(int(sys.argv[1]),sys.argv[2],bool(int(sys.argv[3])))
