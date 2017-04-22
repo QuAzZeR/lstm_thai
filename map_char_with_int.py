@@ -111,14 +111,15 @@ def check_consonant(index):
         if current_char in 'อยว':
             type_of_char.append(KEY_VOWEL)
         else:
-            type_of_char.append(KEY_SAKOD)
-            
+            type_of_char.append(KEY_SAKOD)   
     elif previous_char in tone_mark and previous_of_previous_char in consonant:
         type_of_char.append(KEY_SAKOD)
     elif previous_char in 'อยว':
         if previous_of_previous_char in consonant or ((previous_of_previous_char in tone_mark ) and (previous_of_previous_of_previous_char in consonant)):
             type_of_char[index_previous] = KEY_VOWEL
             type_of_char.append(KEY_SAKOD)
+        else:
+            type_of_char.append(KEY_NONE)
     else:
         type_of_char.append(KEY_NONE)
     
@@ -130,6 +131,7 @@ def map_char_with_int (data):
     type_of_char = []
     for i in  range(len(seq_of_char)):
         current_char = seq_of_char[i]
+        # print (current_char,seq_of_char[:i],i)
         if current_char in karan:
             check_karan(i)
         elif current_char in vowel or current_char in start_vowel:
@@ -145,6 +147,8 @@ def map_char_with_int (data):
             type_of_char.append(KEY_NONE)
     
     temp = []
+    if len(seq_of_char) != len(seq_of_char):
+        print("eiei")
     for i in range(len(seq_of_char)):
         temp.append(map_thai_char[type_of_char[i]] +"_"+ seq_of_char[i] )
     # print (temp)
