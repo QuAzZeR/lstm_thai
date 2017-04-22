@@ -1,14 +1,17 @@
 import numpy
 from keras.utils import np_utils
 from preprocess	import get_seq_of_word,get_seq_of_char
+from map_char_with_int import map_char_with_int
 import model
 def prepare_data(is_char,seq_length):
     prepared_data = model.Data()
     if is_char:
         raw_text = get_seq_of_char()
+        raw_text = map_char_with_int(raw_text)
     else:
         raw_text = get_seq_of_word()
     prepared_data.raw_text = raw_text
+    
     chars = sorted(list(set(raw_text)))
     prepared_data.char_to_int = dict((c,i) for i,c in enumerate(chars))
     prepared_data.int_to_char = dict((i, c) for i, c in enumerate(chars))
